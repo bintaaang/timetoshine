@@ -1,14 +1,38 @@
 import { useNavigation } from '@react-navigation/core'
 import React, {useEffect, useState} from 'react'
-import { StyleSheet, Text,  View , Pressable, FlatList, TouchableHighlight, ScrollView} from 'react-native'
+import { StyleSheet, Text,  View , Pressable, FlatList, TouchableHighlight, ScrollView, TouchableOpacity, Alert} from 'react-native'
 import 'firebase/firestore';
 import firebase from '../database/firebase'
 
 const LandingU = () => {
   const [datakereta, setDataKereta] = useState([]);
 
+  const BeliT = () => {
+    
+    Alert.alert(
+      "Yakinn Beli Tiket ni Bang?",
+      "Apa abang yakin ?",
+      [
+        {
+          text: "Batal",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        {
+          text: "Beli",
+          onPress: async () => {
+            console.log("Sukses Beli");
+            Alert.alert("Sukses Beli!");
+        }
+        }
+      ],
+      { cancelable: false }
+    );
+  }
+
   useEffect(() => {
-    const unsubscribe = firebase
+    //const unsubscribe = 
+      firebase
       .firestore()
       .collection('datakereta')
       .get()
@@ -27,7 +51,7 @@ const LandingU = () => {
         });
         setDataKereta(updatedDataKereta);
       });
-    return () => unsubscribe();
+    //return () => unsubscribe();
   }, []);
 
   return (
@@ -43,6 +67,12 @@ const LandingU = () => {
           <Text>Lokasi Awal: {dataker.lokasia}</Text>
           <Text>Lokasi Tujuan: {dataker.lokasit}</Text>
           <Text>Nama Kereta: {dataker.namak}</Text>
+          <TouchableOpacity
+          onPress={() => { BeliT(); }}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Beli</Text>
+        </TouchableOpacity>
         </View>
         </TouchableHighlight>
       ))}
@@ -70,5 +100,18 @@ const styles = StyleSheet.create({
   },
   itemText: {
     fontWeight: '300',
+  },
+  button: {
+    backgroundColor: '#0782F9',
+    width: '50%',
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: '700',
+    fontSize: 16,
   }
 })

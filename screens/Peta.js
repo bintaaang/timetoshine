@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { View, StyleSheet, Text, Button, Alert } from 'react-native';
+import { View, StyleSheet, Text, Button, Alert, } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import 'firebase/firestore';
 import firebase from '../database/firebase';
@@ -71,22 +71,32 @@ const Peta = () =>{
     return(
         <View style={styles.container}>
             <MapView
-                style={{ flex: 1 }}
-                initialRegion={{
-                latitude: markerCoordinates.latitude,
-                longitude: markerCoordinates.longitude,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
-                }}
-                showsUserLocation={true}
-                followsUserLocation={true}
-                showsMyLocationButton={true}
+              style={{ flex: 1 }}
+              initialRegion={{
+              latitude: markerCoordinates.latitude,
+              longitude: markerCoordinates.longitude,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+              }}
+              showsUserLocation={true}
+              followsUserLocation={true}
+              showsMyLocationButton={true}
             >
-                <Marker
-                     coordinate={markerCoordinates}
-                     title="My Location"
-                     description={`Latitude: ${markerCoordinates.latitude}, Longitude: ${markerCoordinates.longitude}`}
-                />
+            <Marker
+              coordinate={markerCoordinates}
+              title="My Location"
+              description={`Latitude: ${markerCoordinates.latitude}, Longitude: ${markerCoordinates.longitude}`}
+            />
+            <Marker
+              coordinate={{
+                latitude: -7.3177,
+                longitude: 112.7269,
+              }}
+              image={require('../assets/mark.png')} 
+              style={{ width: 10, height: 10,}}
+              title='Prada Yasa Trans'
+              description='Rental Mobil Surabaya Sidoarjo'
+              />
             </MapView>
             <View style={styles.tombol}>
                 <Button color="#3740FE" title="Simpan" onPress={handleSimpan}/>

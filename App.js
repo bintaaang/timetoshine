@@ -16,6 +16,7 @@ import Crud from './screens/Crud';
 import Fetch from './screens/Fetch';
 import Splash from './screens/Splash';
 import OnBoard from './screens/OnBoard';
+import BottomTab from './screens/BotomTab';
 
 
 const Stack = createNativeStackNavigator();
@@ -26,8 +27,8 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen options={{ headerShown: false }} name="Splah" component={Splash} />
         <Stack.Screen options={{ headerShown: false }} name="OnBoard" component={OnBoard} />
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="HomeA" component={HomeScreenA} />
+        <Stack.Screen name="Login" component={LoginScreen} options={{title: ''}}/>
+        <Stack.Screen options={{ headerShown: false }} name="HomeA" component={BottomTab} />
         <Stack.Screen name="LandingU" component={LandingU} />
         <Stack.Screen name="LoginA" component={LoginScreenA} />
         <Stack.Screen name="Beli" component={BeliTiket} />
@@ -36,7 +37,7 @@ export default function App() {
         <Stack.Screen name="Peta" component={Peta} />
         <Stack.Screen name="ListPeta" component={ListPeta} />
         <Stack.Screen name="Crud" component={Crud} />
-        <Stack.Screen name="Fetch" component={Fetch} />
+        <Stack.Screen name="Fetch" component={Fetch} options={{title: ''}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

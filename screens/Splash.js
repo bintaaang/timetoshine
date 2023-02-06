@@ -3,12 +3,15 @@ import Constants from "expo-constants";
 import { Image, VStack, Center, NativeBaseProvider } from "native-base";
 
 export default class Front extends Component {
+
   componentDidMount() {
     setTimeout(() => {
       this.props.navigation.navigate("OnBoard");
     }, 5000);
   }
+
   render() {
+    
     return (
       <NativeBaseProvider bg="#ffffff">
         <VStack
@@ -21,7 +24,7 @@ export default class Front extends Component {
           }}
         >
           <Center>
-            <Image source={require("../assets/favicon.png")} alt="Judul Logo" />
+            <Image source={require("../assets/nilogo.png")} alt="Judul Logo" />
           </Center>
           <Image />
         </VStack>

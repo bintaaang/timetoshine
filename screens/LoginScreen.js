@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, Button } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, Button, Image } from 'react-native'
 import { auth } from '../database/firebase'
 
 const LoginScreen = () => {
@@ -12,6 +12,7 @@ const LoginScreen = () => {
       behavior="padding"
     >
       <View style={styles.buttonContainer}>
+      <Image style={styles.image}source={require('../assets/nilogo.png')} alt="logo"/> 
       <TouchableOpacity
           onPress={() => navigation.navigate('LoginA')}
           style={styles.button}
@@ -75,5 +76,10 @@ const styles = StyleSheet.create({
     color: '#0782F9',
     fontWeight: '700',
     fontSize: 16,
+  },
+  image: {
+    width: 150,
+    height: 150,
+    marginBottom: 10,
   },
 })

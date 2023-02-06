@@ -1,10 +1,9 @@
 import { useNavigation } from '@react-navigation/core'
 import React, { useState} from 'react'
-import { StyleSheet, Text, TouchableOpacity, View, Alert, KeyboardAvoidingView, TextInput} from 'react-native'
+import { StyleSheet, ScrollView, Text, TouchableOpacity, View, Alert, KeyboardAvoidingView, TextInput} from 'react-native'
 import { auth } from '../database/firebase'
 import 'firebase/firestore';
 import firebase from '../database/firebase';
-
 const Crud = () => {
   const [jamb, setJamB] = useState('');
   const [jamt, seJamT] = useState('');
@@ -29,6 +28,7 @@ const Crud = () => {
       .then(() => {
           //jika login berhasil maka masuk halaman login
           Alert.alert("Lokasi Berhasil Disimpan")
+          navigation.replace("HomeA")
       })
       //jika gagal add data akan muncul error
       .catch((error) => {
@@ -37,6 +37,8 @@ const Crud = () => {
   }
 
   return (
+    <View>
+      <ScrollView>
     <KeyboardAvoidingView
       style={styles.container}
       behavior="padding"
@@ -89,6 +91,8 @@ const Crud = () => {
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
+    </ScrollView>
+    </View>
   )
 }
 

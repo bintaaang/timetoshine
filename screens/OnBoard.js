@@ -21,12 +21,12 @@ const OnBoard = ({ navigation }) => {
           <Text
             style={{ color: COLORS.white, fontSize: 35, fontWeight: "bold" }}
           >
-            Discover
+            KERETAKU
           </Text>
           <Text
             style={{ color: COLORS.white, fontSize: 35, fontWeight: "bold" }}
           >
-            World with us
+            Abad Kekosongan
           </Text>
           <Text
             style={{
@@ -48,7 +48,7 @@ const OnBoard = ({ navigation }) => {
             }}
           >
             <View style={style.btn}>
-              <Text>Get Started</Text>
+              <Text>Lanjut</Text>
             </View>
           </TouchableOpacity>
         </View>

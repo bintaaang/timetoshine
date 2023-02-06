@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/core'
-import React, {useEffect, useState} from 'react'
-import { StyleSheet, Text,  View , Pressable, FlatList, ScrollView, TouchableHighlight, TouchableOpacity} from 'react-native'
+import React, {useEffect, useState, useCallback} from 'react'
+import { StyleSheet, Text,  View , Pressable, FlatList, ScrollView, TouchableHighlight, TouchableOpacity, Alert} from 'react-native'
 import 'firebase/firestore';
 import firebase from '../database/firebase'
 
@@ -8,8 +8,43 @@ const Fetch = () => {
   const navigation = useNavigation()
   const [datakereta, setDataKereta] = useState([]);
 
+  const deleteDoc = async (idBuku) => {
+    const firestore = firebase.firestore();
+    try {
+        await firestore.collection("datakereta").doc(idBuku).delete();
+        console.log("Document successfully deleted!");
+    } catch (error) {
+        console.error("Error removing document: ", error);
+    }
+}
+  const deletedata = useCallback((dataker) => {
+    
+    Alert.alert(
+      "Hapus User",
+      "Yakin menghapus akun anda ?",
+      [
+        {
+          text: "Batal",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        {
+          text: "Hapus",
+          onPress: async () => {
+            await deleteDoc(dataker.id)
+            console.log("User Deleted");
+            Alert.alert("User Dihapus!");
+            navigation.replace("HomeA");
+        }
+        }
+      ],
+      { cancelable: false }
+    );
+  })
+
   useEffect(() => {
-    const unsubscribe = firebase.firestore().collection('datakereta').get().then((querySnapshot) => {
+    //const unsubscribe = 
+    firebase.firestore().collection('datakereta').get().then((querySnapshot) => {
         const updatedDataKereta = [];
         querySnapshot.forEach((doc) => {
           updatedDataKereta.push({
@@ -24,7 +59,7 @@ const Fetch = () => {
         });
         setDataKereta(updatedDataKereta);
       });
-    return () => unsubscribe();
+    //return () => unsubscribe();
   }, []);
 
   return (
@@ -47,7 +82,7 @@ const Fetch = () => {
           <Text style={styles.buttonText}>Update</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate('LoginA')}
+          onPress={() => { deletedata(dataker); }}
           style={styles.button}
         >
           <Text style={styles.buttonText}>Delete</Text>
